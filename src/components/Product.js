@@ -23,13 +23,16 @@ export default class Product extends Component {
     })
   }
 
-  edit(){
-    if(this.state.editToggle){
+  edit() {
+    if (this.state.editToggle) {
       this.props.editItem(this.props.id, this.state.editItem, this.state.editPrice, this.state.editQuantity)
-    }else{
       this.setState({
         editToggle: !this.state.editToggle
       })
+    } else {
+        this.setState({
+          editToggle: !this.state.editToggle
+        })
     }
 
   }
@@ -37,17 +40,17 @@ export default class Product extends Component {
 
   render() {
     return (
-      <div style={styles}>
+      <div >
         {
           this.state.editToggle
             ?
-            <div>
-              <input value={this.state.editItem} onChange={e=>this.setState({editItem:e.target.value})} />
-              <input value={this.state.editPrice}  onChange={e=>this.setState({editPrice:e.target.value})}/>
-              <input value={this.state.editQuantity} onChange={e=>this.setState({editQuantity:e.target.value})} />
+            <div style={styles}>
+              <input value={this.state.editItem} onChange={e => this.setState({ editItem: e.target.value })} />
+              <input value={this.state.editPrice} onChange={e => this.setState({ editPrice: e.target.value })} />
+              <input value={this.state.editQuantity} onChange={e => this.setState({ editQuantity: e.target.value })} />
             </div>
             :
-            <div>
+            <div style={styles}>
               <h2>{this.props.product}</h2>
               <h3>${this.props.price}</h3>
               <h3>{this.props.quantity}</h3>
@@ -55,7 +58,7 @@ export default class Product extends Component {
         }
 
 
-        <button onClick={()=>this.edit()}>{this.state.editToggle? 'save' : 'edit'}</button>
+        <button onClick={() => this.edit()}>{this.state.editToggle ? 'save' : 'edit'}</button>
         <button onClick={() => this.props.deleteItem(this.props.id)}>delete</button>
       </div>
     )
