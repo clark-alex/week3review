@@ -19,6 +19,8 @@ export default class Main extends Component {
       priceInput: '',
       quantityInput: '',
     }
+    this.deleteItem = this.deleteItem.bind(this)
+    this.editItem = this.editItem.bind(this)
   }
 
   componentDidMount() {
@@ -35,6 +37,7 @@ export default class Main extends Component {
       priceInput: this.state.priceInput,
       quantityInput: this.state.quantityInput,
     }
+
     !body.itemInput
       ?
       alert('please fill out form')
@@ -49,6 +52,27 @@ export default class Main extends Component {
       })
   }
 
+  deleteItem(id){
+    axios.delete(`/api/products/${id}`).then(res=>{
+      this.setState({
+        products:res.data
+      })
+    })
+  }
+  editItem(id,item,price,quantity){
+    const body={
+      item:item,
+      price:price,
+      quantity:quantity
+    }
+
+    axios.put(`/api/products/${id}`,body).then((res)=>{
+      this.setState({
+        products:res.data
+      })
+    })
+  }
+
 
   render() {
     console.log(this.state)
@@ -56,9 +80,14 @@ export default class Main extends Component {
       return (
         <div key={i}>
           <Product
+
+            id={e.id}
             product={e.item}
             price={e.price}
             quantity={e.quantity}
+            deleteItem={this.deleteItem}
+            editItem={this.editItem}
+
           />
         </div>
       )
