@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 const styles = {
   background: 'grey',
   width: '500px',
+  height: '110px',
   margin: '20px'
 }
 export default class Product extends Component {
@@ -46,7 +47,9 @@ export default class Product extends Component {
             ?
             <div style={styles}>
               <input value={this.state.editItem} onChange={e => this.setState({ editItem: e.target.value })} />
+              <br/>
               <input value={this.state.editPrice} onChange={e => this.setState({ editPrice: e.target.value })} />
+              <br/>
               <input value={this.state.editQuantity} onChange={e => this.setState({ editQuantity: e.target.value })} />
             </div>
             :
